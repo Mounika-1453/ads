@@ -1,0 +1,79 @@
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+
+int *H;
+int size;
+int hashf(int val)
+{
+    int i;
+    i = val%size;
+    return i;
+}
+
+void display()
+{
+    for(int i=0; i<size; i++)
+    {
+        cout << "[ "<< i << " :" << H[i] << " ]" <<endl;
+    }
+}
+
+int insert()
+{
+    int val;
+    cout << "Input a number to insert" <<endl;
+    cin >> val;
+    int i = hashf(val);
+    return H[i] = val;
+}
+
+void del()
+{
+    int val;
+    cout<< "Input element you wish to delete"<<endl;
+    cin >> val;
+    int i = hashf(val);
+    if( H[i] == val)
+        H[i] = 0;
+    display();
+}
+
+void search()
+{
+    int val;
+    cin >> val;
+    int i = hashf(val);
+    if( H[i] == val)
+        cout << "Found at position :    " << i;
+    else
+        cout<<"Not Found";
+}
+
+int main()
+{
+    cout << "Enter the size of array\n";
+    cin >> size;
+    H = (int*) calloc (size, sizeof(int));
+    cout << "Enter your choice";
+    do
+    {
+        cout << "\n 1. Insert \n 2.Delete \n 3.Search \n 4. Exit\n" <<endl;
+        char ch;
+        cin >> ch;
+        switch(ch)
+        {
+            case '1': insert();
+                      display();
+                      break;
+            case '2': del();
+                      break;
+            case '3': search();
+                      break;
+            case '4': exit(0);
+            default : cout<<"Invalid Input";
+        }
+    }while(true);
+    return 0;
+}
+
